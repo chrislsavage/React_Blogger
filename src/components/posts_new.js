@@ -1,14 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createPost } from '../actions/index';
 import { Link } from 'react-router';
 
+//don't use context except in react router..it is in flux
+
 class PostsNew extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  onSubmit(props) {
+    this.props.createPost(props)
+      .then(() => {
+        //blog post has been created and we navigate back to root path
+        this.context.router.push('/');
+      });
+  }
+
+
+
   render() {
     const { fields: { title, categories, content },handleSubmit } = this.props;
     // same as const title = this.props.fields.title
     return (
-      <form onSubmit={handleSubmit (this.props.createPost)}>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h3>Create a New Post</h3>
         <div className={`form-group ${title.touched && title.invalid ? 'has-danger' : ''}`} >
           <label>Title</label>
