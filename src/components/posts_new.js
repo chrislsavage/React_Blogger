@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 
-export default class PostsNew extends Component {
+class PostsNew extends Component {
   render() {
+    const { handleSubmit } = this.props;
+
     return (
-      <form>
+      <form onSubmit={handleSubmit}>
         <h3>Create a New Post</h3>
         <div className='form-group'>
           <label>Title</label>
