@@ -4,12 +4,13 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 import PostsIndex from './components/posts_index';
 import PostsNew from './components/posts_new';
+import PostsShow from './components/posts_show'
 
 export default (
     <Route path="/" component={App}>
       <IndexRoute component={PostsIndex}/>
       <Route path="posts/new" component={PostsNew}/>
+      <Route path="posts/:id" component={PostsShow}/>
     </Route>
 );
-
- //lecture 75 indexroute means that when you go to the parent route you end up rendering the posts index as well
+//this.props.params.id for show route
