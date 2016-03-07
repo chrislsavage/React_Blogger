@@ -1,13 +1,27 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPost } from '../actions/index'
+import { getPost } from '../actions/index';
 
 class PostsShow extends Component {
   componentWillMount() {
     this.props.getPost(this.props.params.id);
   }
+
   render() {
-    return <div>Show post {this.props.title}</div>
+    const { post } = this.props;
+    // same as const post = this.props.post;
+
+    if (!post) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <div>
+        <h3>{post.title}</h3>
+        <h6>Categories: {post.categories}</h6>
+        <p>{post.content}</p>
+      </div>
+    );
   }
 }
 
